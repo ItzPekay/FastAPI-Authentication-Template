@@ -7,7 +7,7 @@ A FastAPI-based authentication system with JWT tokens and PostgreSQL.
 ```
 app/
 ├── main.py              # FastAPI app, router registration, table creation
-├── dependences.py       # get_db, get_current_user (JWT guard)
+├── dependencies.py      # get_db, get_current_user (JWT guard)
 ├── config.py            # Loads env vars via python-dotenv
 ├── database.py          # SQLAlchemy engine, SessionLocal, Base
 ├── core/
@@ -19,7 +19,7 @@ app/
 │   ├── user.py          # UserCreate and UserLogin Pydantic schemas
 │   └── auth.py          # Token response schema
 ├── routes/
-│   ├── auth.py          # POST /auth/register, POST /auth/login, GET /auth/test-jwt
+│   ├── auth.py          # POST /auth/register, POST /auth/login
 │   └── users.py         # GET /users/me (protected)
 └── services/
     ├── auth_service.py  # register() and login() logic
@@ -30,7 +30,6 @@ app/
 
 - `POST /auth/register` — creates a user with a bcrypt-hashed password
 - `POST /auth/login` — verifies credentials, returns a signed JWT
-- `GET /auth/test-jwt` — protected route to verify JWT guard works
 - `GET /users/me` — returns the current authenticated user
 - `get_current_user()` dependency — decodes and validates JWT, injects user into routes
 - Database table auto-created on startup via `Base.metadata.create_all`

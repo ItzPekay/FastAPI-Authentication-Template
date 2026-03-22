@@ -67,7 +67,6 @@ Visit `http://localhost:8000/docs` to explore the API.
 |--------|----------|------|-------------|
 | POST | `/auth/register` | No | Create a new user |
 | POST | `/auth/login` | No | Login and receive a JWT |
-| GET | `/auth/test-jwt` | Yes | Verify your token works |
 | GET | `/users/me` | Yes | Get the current user |
 
 ## How to Protect a Route
@@ -75,7 +74,7 @@ Visit `http://localhost:8000/docs` to explore the API.
 Add `Depends(get_current_user)` to any route handler:
 
 ```python
-from app.dependences import get_current_user
+from app.dependencies import get_current_user
 from app.models.user import User
 
 @router.get("/protected")
@@ -92,7 +91,7 @@ app/
 ├── main.py              # App entry point
 ├── config.py            # Env var loading
 ├── database.py          # SQLAlchemy setup
-├── dependences.py       # get_db, get_current_user
+├── dependencies.py      # get_db, get_current_user
 ├── core/
 │   ├── security.py      # Password hashing
 │   └── tokens.py        # JWT encode/decode

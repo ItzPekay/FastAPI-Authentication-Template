@@ -1,3 +1,4 @@
+import secrets
 from jose import jwt, JWTError
 from datetime import datetime, timedelta, timezone
 from ..config import SECRET_KEY, ALGORITHM, ACCESS_TOKEN_EXPIRE_MINUTES
@@ -11,3 +12,7 @@ def create_access_token(data: dict):
 
 def decode_token(token: str) -> dict:
     return jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+
+
+def create_refresh_token() -> str:
+    return secrets.token_urlsafe(32)
