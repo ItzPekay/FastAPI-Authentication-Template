@@ -63,7 +63,9 @@ ALLOWED_ORIGINS=http://localhost:5173,http://localhost:3000
 ### 5. Run migrations
 
 ```bash
+cd app
 alembic upgrade head
+cd ..
 ```
 
 ### 6. Run the server
