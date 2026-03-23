@@ -28,9 +28,9 @@ def register(db: Session, payload: UserCreate):
 def login(db: Session, payload: UserLogin):
     existing_user = db.query(User).filter(User.username == payload.username).first()
     if not existing_user:
-        raise HTTPException(400, "Account not found!")
+        raise HTTPException(400, "Invalid credentials!")
     if not security.compare_password(payload.password, existing_user.password):
-        raise HTTPException(401, "Incorrect username or password!")
+        raise HTTPException(401, "Invalid credentials!")
 
     access_token = create_access_token({"sub": str(existing_user.id)})
 

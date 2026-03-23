@@ -1,21 +1,24 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, Request
 from sqlalchemy.orm import Session
 
 from ..schemas.user import UserCreate, UserLogin, UserResponse
 from ..schemas.auth import Token, RefreshRequest
 from ..dependencies import get_db
 from ..services import auth_service
+from ..core.limiter import register_limiter, login_limiter
+
 
 router = APIRouter()
 
 
+
 @router.post('/register', response_model=UserResponse)
-def register(payload: UserCreate, db: Session = Depends(get_db)):
+def register(request: Request, payload: UserCreate, db: Session = Depends(get_db), _: None = Depends(register_limiter)):
     return auth_service.register(db, payload)
 
 
 @router.post('/login', response_model=Token)
-def login(payload: UserLogin, db: Session = Depends(get_db)):
+def login(request: Request, payload: UserLogin, db: Session = Depends(get_db), _: None = Depends(login_limiter)):
     return auth_service.login(db, payload)
 
 
