@@ -3,11 +3,7 @@ from .routes import auth, users
 from fastapi.middleware.cors import CORSMiddleware
 from .config import ALLOWED_ORIGINS
 
-
 app = FastAPI(title="Learn Auth API")
-
-
-
 
 app.add_middleware(
     CORSMiddleware,
